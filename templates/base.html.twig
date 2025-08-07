@@ -7,11 +7,11 @@
         {% block stylesheets %}
         {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+        <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+        
     </head>
     <body>
         {% block body %}{% endblock %}
+        
     </body>
 </html>
