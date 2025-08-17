@@ -16,6 +16,7 @@ final class MainController extends AbstractController
             'title' => 'BasketShop - Home',
             'description' => 'Welcome to BasketShop, your one-stop shop for all your basket needs. Explore our wide range of products and enjoy a seamless shopping experience.',
             'keywords' => 'basket, shop, online shopping, ecommerce, products',
+            'active' => 'true',
         ]);
     }
         
