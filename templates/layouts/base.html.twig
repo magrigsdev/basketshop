@@ -83,9 +83,9 @@
         <div class="container-fluid container-xl position-relative">
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="{{url('app_main')}}" class="active">Home</a></li>
-                    <li><a href="{{url('app_about')}}">About</a></li>
-                    <li><a href="{{url('app_category')}}">Category</a></li>
+                    <li><a href="{{url('app_main')}}" class="{{ page == 'main'? 'active' : '' }}">Home</a></li>
+                    <li><a href="{{url('app_about')}}" class="{{ page == 'about'? 'active' : '' }} ">About</a></li>
+                    <li><a href="{{url('app_category')}}" class="{{ page == 'category'? 'active' : '' }} ">Category</a></li>
                     <li><a href="">Product Details</a></li>
                     <li><a href="">Cart</a></li>
                     <li><a href="">Checkout</a></li>
