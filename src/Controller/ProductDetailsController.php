@@ -13,7 +13,7 @@ final class ProductDetailsController extends AbstractController
     {
         return $this->render('product_details/index.html.twig', [
             'controller_name' => 'ProductDetailsController',
-            'page'=> 'product_details',
+            'page' => 'product_details',
             'title' => 'BasketShop - product details',
         ]);
     }

@@ -14,7 +14,7 @@ final class CategoryController extends AbstractController
         return $this->render('category/index.html.twig', [
             'controller_name' => 'CategoryController',
             'title' => 'Category Page',
-            'page'=> 'category', // Specify the current page for active navigation
+            'page' => 'category', // Specify the current page for active navigation
         ]);
     }
 }

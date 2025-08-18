@@ -13,7 +13,7 @@ final class CartController extends AbstractController
     {
         return $this->render('cart/index.html.twig', [
             'controller_name' => 'CartController',
-            'page'=> 'cart',
+            'page' => 'cart',
             'title' => 'BasketShop - Cart',
         ]);
     }

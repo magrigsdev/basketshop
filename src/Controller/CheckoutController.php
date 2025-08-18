@@ -13,7 +13,7 @@ final class CheckoutController extends AbstractController
     {
         return $this->render('checkout/index.html.twig', [
             'controller_name' => 'CheckoutController',
-            'page'=> 'checkout',
+            'page' => 'checkout',
             'title' => 'BasketShop - Checkout',
         ]);
     }
