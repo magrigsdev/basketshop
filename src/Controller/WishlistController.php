@@ -13,6 +13,8 @@ final class WishlistController extends AbstractController
     {
         return $this->render('wishlist/index.html.twig', [
             'controller_name' => 'WishlistController',
+            'page' => 'wishlist',
+            'title' => 'BasketShop - Wishlist',
         ]);
     }
 }

@@ -1,20 +1,287 @@
-<!DOCTYPE html>
+{% extends './layouts/base.html.twig' %}
 
-<title>Hello RegisterController!</title>
+{% block title %}{{title}} {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>D:/LEARNING/SYMFONY_PROJETS/basketshop/src/Controller/RegisterController.php</code></li>
-        <li>Your template at <code>D:/LEARNING/SYMFONY_PROJETS/basketshop/templates/register/index.html.twig</code></li>
-    </ul>
-</div>
+
+    {% block main %}
+        
+          <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title light-background">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">Register</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Register</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Register Section -->
+    <section id="register" class="register section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="registration-form-wrapper">
+              <div class="form-header text-center">
+                <h2>Create Your Account</h2>
+                <p>Create your account and start shopping with us</p>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-8 mx-auto">
+                  <form action="register.php" method="post">
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full Name" required="" autocomplete="name">
+                      <label for="fullName">Full Name</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required="" autocomplete="email">
+                      <label for="email">Email Address</label>
+                    </div>
+
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <div class="form-floating">
+                          <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="" minlength="8" autocomplete="new-password">
+                          <label for="password">Password</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-floating">
+                          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required="" minlength="8" autocomplete="new-password">
+                          <label for="confirmPassword">Confirm Password</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                      <select class="form-select" id="country" name="country" required="">
+                        <option value="" selected="" disabled="">Select your country</option>
+                        <option value="us">United States</option>
+                        <option value="ca">Canada</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="au">Australia</option>
+                        <option value="de">Germany</option>
+                        <option value="fr">France</option>
+                        <option value="jp">Japan</option>
+                        <option value="other">Other</option>
+                      </select>
+                      <label for="country">Country</label>
+                    </div>
+
+                    <div class="form-check mb-4">
+                      <input class="form-check-input" type="checkbox" id="termsCheck" name="termsCheck" required="">
+                      <label class="form-check-label" for="termsCheck">
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                      </label>
+                    </div>
+
+                    <div class="form-check mb-4">
+                      <input class="form-check-input" type="checkbox" id="marketingCheck" name="marketingCheck">
+                      <label class="form-check-label" for="marketingCheck">
+                        I would like to receive marketing communications about products, services, and promotions
+                      </label>
+                    </div>
+
+                    <div class="d-grid mb-4">
+                      <button type="submit" class="btn btn-register">Create Account</button>
+                    </div>
+
+                    <div class="login-link text-center">
+                      <p>Already have an account? <a href="#">Sign in</a></p>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <div class="social-login">
+                <div class="row">
+                  <div class="col-lg-8 mx-auto">
+                    <div class="divider">
+                      <span>or sign up with</span>
+                    </div>
+                    <div class="social-buttons">
+                      <a href="#" class="btn btn-social">
+                        <i class="bi bi-google"></i>
+                        <span>Google</span>
+                      </a>
+                      <a href="#" class="btn btn-social">
+                        <i class="bi bi-facebook"></i>
+                        <span>Facebook</span>
+                      </a>
+                      <a href="#" class="btn btn-social">
+                        <i class="bi bi-apple"></i>
+                        <span>Apple</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="decorative-elements">
+                <div class="circle circle-1"></div>
+                <div class="circle circle-2"></div>
+                <div class="circle circle-3"></div>
+                <div class="square square-1"></div>
+                <div class="square square-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Register Section -->
+
+  </main>
+        
+        
+    {% endblock %}
+    {% block footer %}
+            <footer id="footer" class="footer dark-background">
+                <div class="footer-main">
+                <div class="container">
+                    <div class="row gy-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget footer-about">
+                        <a href="index.html" class="logo">
+                            <span class="sitename">BasketsShop</span>
+                        </a>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in nibh vehicula, facilisis magna ut, consectetur lorem. Proin eget tortor risus.</p>
+
+                        <div class="social-links mt-4">
+                            <h5>Connect With Us</h5>
+                            <div class="social-icons">
+                            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                            <a href="#" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 col-sm-6">
+                        <div class="footer-widget">
+                        <h4>Shop</h4>
+                        <ul class="footer-links">
+                            <li><a href="category.html">New Arrivals</a></li>
+                            <li><a href="category.html">Bestsellers</a></li>
+                            <li><a href="category.html">Women's Clothing</a></li>
+                            <li><a href="category.html">Men's Clothing</a></li>
+                            <li><a href="category.html">Accessories</a></li>
+                            <li><a href="category.html">Sale</a></li>
+                        </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 col-sm-6">
+                        <div class="footer-widget">
+                        <h4>Support</h4>
+                        <ul class="footer-links">
+                            <li><a href="support.html">Help Center</a></li>
+                            <li><a href="account.html">Order Status</a></li>
+                            <li><a href="shiping-info.html">Shipping Info</a></li>
+                            <li><a href="return-policy.html">Returns &amp; Exchanges</a></li>
+                            <li><a href="#">Size Guide</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                        <h4>Contact Information</h4>
+                        <div class="footer-contact">
+                            <div class="contact-item">
+                            <i class="bi bi-geo-alt"></i>
+                            <span>123 Fashion Street, New York, NY 10001</span>
+                            </div>
+                            <div class="contact-item">
+                            <i class="bi bi-telephone"></i>
+                            <span>+1 (555) 123-4567</span>
+                            </div>
+                            <div class="contact-item">
+                            <i class="bi bi-envelope"></i>
+                            <span>hello@example.com</span>
+                            </div>
+                            <div class="contact-item">
+                            <i class="bi bi-clock"></i>
+                            <span>Monday-Friday: 9am-6pm<br>Saturday: 10am-4pm<br>Sunday: Closed</span>
+                            </div>
+                        </div>
+
+                        <div class="app-buttons mt-4">
+                            <a href="#" class="app-btn">
+                            <i class="bi bi-apple"></i>
+                            <span>App Store</span>
+                            </a>
+                            <a href="#" class="app-btn">
+                            <i class="bi bi-google-play"></i>
+                            <span>Google Play</span>
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="footer-bottom">
+                <div class="container">
+                    <div class="row gy-3 align-items-center">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="copyright">
+                        <p>© <span>Copyright</span> <strong class="sitename">NiceShop</strong>. All Rights Reserved.</p>
+                        </div>
+                        <div class="credits mt-1">
+                        <!-- All the links in the footer should remain intact. -->
+                        <!-- You can delete the links only if you've purchased the pro version. -->
+                        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        <div class="d-flex flex-wrap justify-content-lg-end justify-content-center align-items-center gap-4">
+                        <div class="payment-methods">
+                            <div class="payment-icons">
+                            <i class="bi bi-credit-card" aria-label="Credit Card"></i>
+                            <i class="bi bi-paypal" aria-label="PayPal"></i>
+                            <i class="bi bi-apple" aria-label="Apple Pay"></i>
+                            <i class="bi bi-google" aria-label="Google Pay"></i>
+                            <i class="bi bi-shop" aria-label="Shop Pay"></i>
+                            <i class="bi bi-cash" aria-label="Cash on Delivery"></i>
+                            </div>
+                        </div>
+
+                        <div class="legal-links">
+                            <a href="tos.html">Terms</a>
+                            <a href="privacy.html">Privacy</a>
+                            <a href="tos.html">Cookies</a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+                </div>
+            </footer>
+            <!-- Scroll Top -->
+            <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        {% endblock %}
 {% endblock %}
+

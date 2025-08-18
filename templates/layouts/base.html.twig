@@ -120,10 +120,10 @@
                     <li><a href="{{url('app_main')}}" class="{{ page == 'main'? 'active' : '' }}">Home</a></li>
                     <li><a href="{{url('app_about')}}" class="{{ page == 'about'? 'active' : '' }} ">About</a></li>
                     <li><a href="{{url('app_category')}}" class="{{ page == 'category'? 'active' : '' }} ">Category</a></li>
-                    <li><a href="{{url('app_product_details')}}">Product Details</a></li>
-                    <li><a href="{{url('app_cart')}}">Cart</a></li>
-                    <li><a href="{{url('app_checkout')}}">Checkout</a></li>
-                    <li><a href="{{url('app_contact')}}">Contact</a></li>
+                    <li><a href="{{url('app_product_details')}}" class="{{ page == 'product_details'? 'active' : '' }} ">Product Details</a></li>
+                    <li><a href="{{url('app_cart')}}" class="{{ page == 'cart'? 'active' : '' }} ">Cart</a></li>
+                    <li><a href="{{url('app_checkout')}}" class="{{ page == 'checkout'? 'active' : '' }} ">Checkout</a></li>
+                    <li><a href="{{url('app_contact')}}" class="{{ page == 'contact'? 'active' : '' }} ">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -143,7 +143,7 @@
         </div>
         </div>
 
-  </header>
+    </header>
         {% block main %}{% endblock %}
 
         {% block footer %}{% endblock %}

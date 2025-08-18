@@ -13,6 +13,8 @@ final class RegisterController extends AbstractController
     {
         return $this->render('register/index.html.twig', [
             'controller_name' => 'RegisterController',
+            'page' => 'register',
+            'title' => 'BasketShop - Register',
         ]);
     }
 }

@@ -13,6 +13,8 @@ final class ProfileController extends AbstractController
     {
         return $this->render('profile/index.html.twig', [
             'controller_name' => 'ProfileController',
+            'page' => 'profile',
+            'title' => 'BasketShop - Profile',
         ]);
     }
 }
