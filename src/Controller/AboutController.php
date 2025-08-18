@@ -16,7 +16,6 @@ final class AboutController extends AbstractController
             'title' => 'BasketShop - About Us',
             'description' => 'Learn more about BasketShop, our mission, values, and the team behind your favorite basket products. We are committed to providing quality and service.',
             'keywords' => 'about us, basket shop, company information, team, mission',
-            'active' => 'true',
             'page'=> 'about', // Specify the current page for active navigation
         ]);
     }
