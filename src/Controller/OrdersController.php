@@ -13,6 +13,8 @@ final class OrdersController extends AbstractController
     {
         return $this->render('orders/index.html.twig', [
             'controller_name' => 'OrdersController',
+            'title' => 'BasketShop - Orders',
+            'page' => 'orders', // Specify the current page for active navigation
         ]);
     }
 }

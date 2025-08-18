@@ -13,6 +13,8 @@ final class SignInController extends AbstractController
     {
         return $this->render('sign_in/index.html.twig', [
             'controller_name' => 'SignInController',
+            'page' => 'sign_in',
+            'title' => 'BasketShop - Sign In',
         ]);
     }
 }
