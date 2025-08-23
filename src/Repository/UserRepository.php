@@ -2,39 +2,31 @@
 
 namespace App\Repository;
 
-use Dom\Entity;
+
 use App\Entity\User;
-use Doctrine\ORM\EntityRepository;
+use App\Service\UserService;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @extends ServiceEntityRepository<User>
  */
 class UserRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    
+    private UserPasswordHasherInterface $user_password_hasher_interface;
+    private PasswordAuthenticatedUserInterface $paui;
+    private UserService $user_service;
+
+    public function __construct(ManagerRegistry $registry, UserPasswordHasherInterface $userPasswordHasher)
     {
         parent::__construct($registry, User::class);
+        $this->user_password_hasher_interface = $userPasswordHasher;
     }
-    public function save(User $user, bool $flush = false): void
-    {
-        if(!$user->getId()){
-            do{
-                $newId = $this->generateUserId();
-            }while($this->IdExist($newId));
-            $user->setId($newId);
-            $this->getEntityManager()->persist($user);       
-            if ($flush) {
-                $this->getEntityManager()->flush();
-            }
-        }
-           
-    }
-    protected function generateUserId(): string
-    {
-        return 'user'.bin2hex(random_bytes(5));
-    }
+    
+    
     public function EmailIsExist(string $email):bool
     {
         $user = $this->findOneBy(['email'=>$email]);
@@ -43,21 +35,14 @@ class UserRepository extends ServiceEntityRepository
         }
         return false;
     }
-    protected function IdExist(string $id):bool
+
+
+    public function save(User $user, bool $flush = false):void
     {
-        $user = $this->find($id);
-        if($user){
-            return true;
-        }
-        return false;
-    }
-    public function remove(User $user, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($user);       
-        if ($flush) {
+      $this->getEntityManager()->persist($user);
+        if($flush){
             $this->getEntityManager()->flush();
         }
     }
-
-   
+  
 }

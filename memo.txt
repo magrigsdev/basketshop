@@ -7,7 +7,7 @@ php bin/phpunit --testdox --colors=always
 php bin/console doctrine:fixtures:load --env=test --purge-with-truncate
 
 //vider une tables "name_table"
-php bin/console doctrine:query:sql "DELETE FROM " --env=test
+php bin/console doctrine:query:sql "DELETE FROM user" --env=test
 
 //creer une migration
 php bin/console make:migration
