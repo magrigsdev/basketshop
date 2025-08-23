@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class User
 {
     #[ORM\Id]
-    #[ORM\Column(type:'string', length: 12)] //id personnaliser , ex: userxxxxx
+    #[ORM\Column(type: 'string', length: 12)] // id personnaliser , ex: userxxxxx
     private ?string $id = null;
 
     #[ORM\Column(length: 255)]
@@ -53,6 +53,7 @@ class User
     {
         return $this->id;
     }
+
     public function setId(string $id): static
     {
         $this->id = $id;

@@ -1,7 +1,6 @@
-<?php 
+<?php
 
 namespace App\Service;
-
 
 use App\Entity\User;
 use App\Repository\UserRepository;
@@ -10,23 +9,23 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class UserService
 {
-    private UserPasswordHasherInterface  $user_password_hasher_interface;
+    private UserPasswordHasherInterface $user_password_hasher_interface;
     private UserRepository $user_repository;
     private PasswordAuthenticatedUserInterface $paui;
+
     public function __construct(UserPasswordHasherInterface $user_password_hasher_interface, UserRepository $user_repository)
     {
         $this->user_password_hasher_interface = $user_password_hasher_interface;
         $this->user_repository = $user_repository;
     }
 
-    public  function generateUserId(): string
+    public function generateUserId(): string
     {
         return 'user'.bin2hex(random_bytes(5));
     }
 
-    public function createUser(string $email, string $plainPassword, array $roles, string $firstName, string $lastName, string $address, string $postalCode, string $city): ?User 
+    public function createUser(string $email, string $plainPassword, array $roles, string $firstName, string $lastName, string $address, string $postalCode, string $city): ?User
     {
-       
         $user = new User();
         $user->setEmail($email);
         $user->setPassword(password_hash($plainPassword, PASSWORD_BCRYPT));
@@ -39,21 +38,19 @@ class UserService
 
         do {
             $newId = $this->generateUserId();
-        } while ($this->user_repository->find($newId) !== null);
+        } while (null !== $this->user_repository->find($newId));
 
         $user->setId($newId);
 
-        if($this->user_repository->EmailIsExist($email)){
+        if ($this->user_repository->EmailIsExist($email)) {
             return null;
         }
 
         return $user;
     }
 
-    public function password_is_valid($password, $hashed_password) :bool
+    public function password_is_valid($password, $hashed_password): bool
     {
-      return password_verify($password, $hashed_password) ? true : false;
+        return password_verify($password, $hashed_password) ? true : false;
     }
-
-    
 }
