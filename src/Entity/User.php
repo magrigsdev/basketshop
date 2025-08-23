@@ -11,9 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
 class User
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'string', length: 12)] // id personnaliser , ex: userxxxxx
+    private ?string $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
@@ -37,7 +36,7 @@ class User
     private ?string $city = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $roles = null;
+    private array $roles = [];
 
     /**
      * @var Collection<int, Order>
@@ -50,9 +49,16 @@ class User
         $this->orders = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function setId(string $id): static
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -139,12 +145,12 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?string
+    public function getRoles(): ?array
     {
         return $this->roles;
     }
 
-    public function setRoles(string $roles): static
+    public function setRoles(array $roles): static
     {
         $this->roles = $roles;
 
