@@ -18,7 +18,7 @@ class UseRepositoryTest extends KernelTestCase
         $user = new User();
         $user->setEmail('test2@example.com');
         $user->setPassword('password123'); 
-        $user->setRoles('ROLE_USER');
+        $user->setRoles(['ROLE_USER']);
         $user->setFirstName('John');
         $user->setLastName('Doe');
         $user->setAddress('14 Rue de la Paix');

@@ -144,12 +144,12 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?string
+    public function getRoles(): ?array
     {
         return $this->roles;
     }
 
-    public function setRoles(string $roles): static
+    public function setRoles(array $roles): static
     {
         $this->roles = $roles;
 

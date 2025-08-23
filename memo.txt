@@ -9,4 +9,15 @@ php bin/console doctrine:fixtures:load --env=test --purge-with-truncate
 //vider une tables "name_table"
 php bin/console doctrine:query:sql "DELETE FROM " --env=test
 
+//creer une migration
+php bin/console make:migration
+
+//la diffrerence des migrations
+php bin/console doctrine:migrations:diff
+
+//applique des migrations
+php bin/console doctrine:migrations:migrate
+
+//le etat des migrations
+php bin/console doctrine:migrations:status
 

@@ -19,14 +19,33 @@ class UserRepository extends ServiceEntityRepository
     }
     public function save(User $user, bool $flush = false): void
     {
-        $this->getEntityManager()->persist($user);       
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }   
+        if(!$user->getId()){
+            do{
+                $newId = $this->generateUserId();
+            }while($this->IdExist($newId));
+            $user->setId($newId);
+            $this->getEntityManager()->persist($user);       
+            if ($flush) {
+                $this->getEntityManager()->flush();
+            }
+        }
+           
+    }
+    protected function generateUserId(): string
+    {
+        return 'user'.bin2hex(random_bytes(5));
     }
     public function EmailIsExist(string $email):bool
     {
         $user = $this->findOneBy(['email'=>$email]);
+        if($user){
+            return true;
+        }
+        return false;
+    }
+    protected function IdExist(string $id):bool
+    {
+        $user = $this->find($id);
         if($user){
             return true;
         }
