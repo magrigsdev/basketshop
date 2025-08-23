@@ -12,7 +12,7 @@ class User
 {
     #[ORM\Id]
     #[ORM\Column(type:'string', length: 12)] //id personnaliser , ex: userxxxxx
-    private string $id;
+    private ?string $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
