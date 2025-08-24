@@ -16,11 +16,14 @@
         <h1 class="mb-2 mb-lg-0">Login</h1>
         <nav class="breadcrumbs">
           <ol>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="{{url('app_main')}}">Home.</a></li>
             <li class="current">Login</li>
           </ol>
         </nav>
       </div>
+      {% if message   %}
+            <div class="alert alert-success m-2 p-2" data-aos="fade-up" data-aos-delay="100">{{ message }}</div>
+      {% endif %}
     </div><!-- End Page Title -->
 
     <!-- Login Section -->

@@ -21,6 +21,11 @@
               </ol>
             </nav>
           </div>
+
+          {% if message is defined and message %}
+            <div class="alert alert-danger m-2 p-2" data-aos="fade-up" data-aos-delay="100">{{ message }}</div>
+          {% endif %}
+                    
         </div><!-- End Page Title -->
 
         <!-- Register Section -->
@@ -32,7 +37,7 @@
               <div class="col-lg-10">
                 <div class="registration-form-wrapper">
                   <div class="form-header text-center">
-                    <h2>Create Your Account</h2>
+                    <h2>Create Your Account </h2>
                     <p>Create your account and start shopping with us</p>
                   </div>
 
@@ -111,7 +116,7 @@
                         </div>
 
                         <div class="d-grid mb-4">
-                          <button type="submit" class="btn btn-register">Create Account</button>
+                          <button type="submit" class="btn btn-register">Create Account <i class="bi bi-arrow-right"></i></button>
                         </div>
 
                         <div class="login-link text-center">
