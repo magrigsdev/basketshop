@@ -4,12 +4,10 @@ namespace App\Service;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class UserService
 {
     private UserRepository $user_repository;
-    private PasswordAuthenticatedUserInterface $paui;
 
     public function __construct(UserRepository $user_repository)
     {

@@ -1,6 +1,6 @@
 vendor/bin/php-cs-fixer fix --diff --verbose
 
-
+tous les tests
 php bin/phpunit --testdox --colors=always
 
 //vider les tables 
