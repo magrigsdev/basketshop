@@ -29,7 +29,7 @@ class UserRepositoryTest extends KernelTestCase
         $user->setPostalCode('75002');
         $user->setCity('Paris');
 
-        $user_service = new UserService(self::getContainer()->get('security.user_password_hasher'), $this->user_repository);
+        $user_service = new UserService($this->user_repository);
 
         $user_created = $user_service->createUser(
             $user->getEmail(),
@@ -44,8 +44,8 @@ class UserRepositoryTest extends KernelTestCase
         if (is_null($user_created)) {
             $this->assertNotNull($user_created, 'User with this email : '.$user->getEmail().' already exists.');
         }
-
-        $this->user_repository->save($user_created, true);
+        $saved_user = $this->user_repository->save($user_created, true);
+        $this->assertTrue($saved_user);
         $this->assertNotNull($user_created->getId());
     }
 }
