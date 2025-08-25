@@ -45,8 +45,8 @@
                     <div class="col-lg-8 mx-auto">
                       <form action="{{path('app_register')}}" method="post">
                         <div class="form-floating mb-3">
-                          <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="First Name" required="" autocomplete="name">
-                          <label for="FirstName">First Name</label>
+                          <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required="" autocomplete="name">
+                          <label for="firstName">First Name</label>
                         </div>
                         <div class="form-floating mb-3">
                           <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required="" autocomplete="name">
@@ -57,9 +57,10 @@
                           <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required="" autocomplete="email">
                           <label for="email">Email Address</label>
                         </div>
+                        {# postalcode #}
                         <div class="form-floating mb-3">
-                          <input type="text" class="form-control" id="codePostal" name="codePostal" placeholder="Code postal" required="" autocomplete="codePostal">
-                          <label for="codePostal">Code Postal</label>
+                          <input type="text" class="form-control" id="postalcode" name="postalcode" placeholder="postalcode" required="" autocomplete="codepostal">
+                          <label for="postalcode">Postal Code</label>
                         </div>
                         <div class="form-floating mb-3">
                           <input type="text" class="form-control" id="city" name="city" placeholder="city" required="" autocomplete="city">
@@ -90,18 +91,18 @@
                           </div>
                         </div>
 
-                        <div class="form-floating mb-4">
-                          <select class="form-select" id="country" name="country" required="">
+                        {# <div class="form-floating mb-4">
+                          <select class="form-select" id="roles" name="roles" required="">
                             <option value="" selected="" disabled="">Select your roles</option>
-                            <option value="admin">Admin</option>
-                            <option value="client">Client</option>
+                            <option value="ROLE_ADMIN">Admin</option>
+                            <option value="ROLE_USER">Client</option>
                             
                           </select>
-                          <label for="country">Country</label>
-                        </div>
+                          <label for="country">role</label>
+                        </div> #}
 
 
-                        <div class="form-check mb-4">
+                        {# <div class="form-check mb-4">
                           <input class="form-check-input" type="checkbox" id="termsCheck" name="termsCheck" required="">
                           <label class="form-check-label" for="termsCheck">
                             I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
@@ -113,14 +114,14 @@
                           <label class="form-check-label" for="marketingCheck">
                             I would like to receive marketing communications about products, services, and promotions
                           </label>
-                        </div>
+                        </div> #}
 
                         <div class="d-grid mb-4">
                           <button type="submit" class="btn btn-register">Create Account <i class="bi bi-arrow-right"></i></button>
                         </div>
 
                         <div class="login-link text-center">
-                          <p>Already have an account? <a href="#">Sign in</a></p>
+                          <p>Already have an account? <a href="{{url('app_sign_in')}}">Sign in</a></p>
                         </div>
                       </form>
                     </div>

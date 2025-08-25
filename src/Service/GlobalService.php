@@ -1,9 +1,8 @@
-<?php 
+<?php
 
 namespace App\Service;
 
 use App\Entity\User;
-use Composer\XdebugHandler\Status;
 
 class GlobalService
 {
@@ -14,7 +13,6 @@ class GlobalService
 
     public function Message(string $message, bool $state = false): ?string
     {
-        return $state ? $message : null ;
+        return $state ? $message : null;
     }
-    
 }

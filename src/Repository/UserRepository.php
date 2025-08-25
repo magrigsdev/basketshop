@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Service\UserService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
@@ -14,14 +13,12 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  */
 class UserRepository extends ServiceEntityRepository
 {
-    private UserPasswordHasherInterface $user_password_hasher_interface;
     private PasswordAuthenticatedUserInterface $paui;
     private UserService $user_service;
 
-    public function __construct(ManagerRegistry $registry, UserPasswordHasherInterface $userPasswordHasher)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
-        $this->user_password_hasher_interface = $userPasswordHasher;
     }
 
     public function EmailIsExist(string $email): bool
@@ -34,11 +31,15 @@ class UserRepository extends ServiceEntityRepository
         return false;
     }
 
-    public function save(User $user, bool $flush = false): void
+    public function save(User $user, bool $flush = false): bool
     {
         $this->getEntityManager()->persist($user);
         if ($flush) {
             $this->getEntityManager()->flush();
+
+            return true;
         }
+
+        return false;
     }
 }
