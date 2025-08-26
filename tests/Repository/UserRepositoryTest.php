@@ -17,10 +17,10 @@ class UserRepositoryTest extends KernelTestCase
         $this->user_repository = self::getContainer()->get(UserRepository::class);
     }
 
-    public function testInsertUser(): void
+    public function testCreateUser(): void
     {
         $user = new User();
-        $user->setEmail('test8@example.com');
+        $user->setEmail('test4@example.com');
         $user->setPassword('password123');
         $user->setRoles(['ROLE_USER']);
         $user->setFirstName('John');
