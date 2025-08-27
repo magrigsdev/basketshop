@@ -21,10 +21,13 @@ class CategoryRepositoryTest extends KernelTestCase
     {
         $category = new Category();
         $category->setName('Category Test2');
+        $category->setDescription('Description Test2');
         $category_service = new CategoryService($this->category_repository);
 
         $category_created = $category_service->createCategory(
-            $category->getName()
+            $category->getName(),
+            $category->getDescription()
+            // adding description
         );
 
         $this->assertTrue($category_created['create'], 'Category with this name : '.$category->getName().' already exists.');

@@ -14,10 +14,11 @@ class CategoryService
         $this->category_repository = $category_repository;
     }
 
-    public function createCategory(string $name): array
+    public function createCategory(string $name, string $description): array
     {
         $category = new Category();
         $category->setName($name);
+        $category->setDescription($description);
 
         if ($this->category_repository->findOneBy(['name' => $name])) {
             return ['create' => false, 'message' => 'Category with this name : '.$name.' already exists.'];
