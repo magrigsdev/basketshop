@@ -10,8 +10,11 @@
 ➡️ Objectif : insertion des données utilisateurs
 
 * **Sous-tâche 1.1** : Écrire un **test unitaire** pour vérifier l’insertion d’un `User` en BDD.👍
-* **Sous-tâche 1.2** : Implémenter la fonction `createUser()` (insertion réelle).
-* **Sous-tâche 1.3** : Vérifier que les données sont bien persistées et récupérables en BDD.
+* **Sous-tâche 1.2** : Implémenter la fonction `createUser()` (insertion réelle).👍
+* **Sous-tâche 1.3** : Vérifier que les données sont bien persistées et récupérables en BDD.👍
+
+* ** 1.4 insertion des données :
+        1.4.1 : 
 
 ---
 
