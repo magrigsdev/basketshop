@@ -20,8 +20,8 @@ class UserRepositoryTest extends KernelTestCase
     public function testCreateUser(): void
     {
         $user = new User();
-        $user->setEmail('test4@example.com');
-        $user->setPassword('password123');
+        $user->setEmail('test5@example.com');
+        $user->setPassword('password125');
         $user->setRoles(['ROLE_USER']);
         $user->setFirstName('John');
         $user->setLastName('Doe');

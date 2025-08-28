@@ -20,7 +20,7 @@ class CategoryRepositoryTest extends KernelTestCase
     public function testCreateCategory(): void
     {
         $category = new Category();
-        $category->setName('Category Test2');
+        $category->setName('Category Test3');
         $category->setDescription('Description Test2');
         $category_service = new CategoryService($this->category_repository);
 
