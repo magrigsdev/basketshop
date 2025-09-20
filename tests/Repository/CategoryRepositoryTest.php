@@ -37,7 +37,7 @@ class CategoryRepositoryTest extends KernelTestCase
 
     public function testGetAllCategories(): void
     {
-        $categories = $this->category_repository->getAllCategories();
+        $categories = $this->category_repository->getAll();
         $this->assertIsArray($categories);
         $this->assertNotEmpty($categories);
         foreach ($categories as $category) {

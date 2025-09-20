@@ -19,7 +19,7 @@ final class CategoryController extends AbstractController
             'controller_name' => 'CategoryController',
             'title' => 'Category Page',
             'page' => 'category', // Specify the current page for active navigation
-            'categories' => $category_repository->getAllCategories(),
+            'categories' => $category_repository->findAll(),
         ]);
     }
 }

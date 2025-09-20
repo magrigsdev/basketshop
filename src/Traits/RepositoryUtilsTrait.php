@@ -5,51 +5,29 @@ namespace App\Traits;
 trait RepositoryUtilsTrait
 {
     /**
-     * Summary of getIdByField.
-     *
-     * @param mixed $value
-     *                     return le ID d'une entité par champ
-     */
-    public function getIdByField(string $field, mixed $value): ?int
-    {
-        $entity = $this->findOnBy([$field => $value]);
-
-        return $entity ? $entity->getId() : null;
-    }
-
-    /**
-     * Summary of existsByField.
-     *
-     * @return bool
-     *              vérifié si une valeur existe déjà pour ce champ
-     */
-    public function existsByField(string $field, mixed $value): bool
-    {
-        return null !== $this->findOnBy([$field => $value]);
-    }
-
-    /**
-     * Summary of getCount
-     * retourne le nombre total d'enregistrement.
+     * Returns the record count.
      */
     public function getCount(): int
     {
         return $this->count([]);
     }
 
-    public function updateField(object $entity, string $field, mixed $value): void
-    {
-        $setter = 'set'.ucfirst($field);
-        if (method_exists($entity, $setter)) {
-            $entity->$setter($value);
-        }
-    }
-
+    /**
+     * Retrieves all records in an array format.
+     */
     public function getAll(): array
     {
         return $this->findAll();
     }
 
+    /**
+     * Persists the given entity to the database.
+     *
+     * @param object $entity the entity instance to be saved
+     * @param bool   $flush  whether to immediately flush changes to the database
+     *
+     * @return bool returns true if the entity was flushed, false otherwise
+     */
     public function save(object $entity, bool $flush = false): bool
     {
         $this->getEntityManager()->persist($entity);
@@ -63,15 +41,32 @@ trait RepositoryUtilsTrait
     }
 
     /**
-     * Retourne l'ID d'une entité selon un champ donné.
+     * Returns the ID of an entity based on a given field.
      *
-     * @param string $field Nom du champ ('name', 'type', 'libelle', etc.)
-     * @param mixed  $value Valeur à chercher
+     * @param string $field The field name ('name', 'type', 'label', etc.)
+     * @param mixed  $value The value to search for
+     *
+     * @return int|null The entity ID if found, or null if no match exists
      */
     public function getIdByName(string $field, mixed $value): mixed
     {
         $entity = $this->findOneBy([$field => $value]);
 
-        return $entity !== null ? $entity : null;
+        return null !== $entity ? $entity : null;
+    }
+
+    /**
+     * Checks whether an entity exists for the given field and value.
+     *
+     * @param string $field the field name to search by
+     * @param mixed  $value the value to check against
+     *
+     * @return bool true if an entity exists, false otherwise
+     */
+    public function ExistEntity(string $field, mixed $value): bool
+    {
+        $entity = $this->findOneBy([$field => $value]);
+
+        return null !== $entity; // true the value existe
     }
 }
