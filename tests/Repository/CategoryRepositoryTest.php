@@ -2,6 +2,7 @@
 
 namespace App\Tests\Repository;
 
+use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -15,4 +16,12 @@ class CategoryRepositoryTest extends KernelTestCase
         $this->category_repository = self::getContainer()->get(CategoryRepository::class);
     }
 
+    public function testRecordExist(): void
+    {
+        $category = new Category();
+        $category->setName('lux');
+        $category->setDescription('description ...');
+        $isExist = $this->category_repository->recordExists(['name' => 'lux', 'description' => 'descript ...']);
+        $this->assertFalse($isExist, 'the category does not exist');
+    }
 }
