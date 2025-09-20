@@ -2,17 +2,34 @@
 
 namespace App\Service;
 
-use App\Entity\User;
+use Doctrine\Persistence\ObjectRepository;
 
 class GlobalService
 {
-    public function getUserFirstName(?User $user): string
-    {
-        return $user ? $user->getFirstName() : 'Guest';
+    /**
+     * Compare les données avec l'entité existante et crée ou met à jour si nécessaire.
+     *
+     * @param array            $criteria   Champs pour chercher l'entité existante ['field' => 'value']
+     * @param ObjectRepository $repository Repository de l'entité
+     *
+     * @return bool true si créé ou mis à jour, false si rien à changer
+     */
+    public function importUnique(
+        array $criteria,
+        ObjectRepository $repository,
+    ): bool {
+        foreach ($criteria as $field => $value) {
+            $existing = $repository->findOneBy([$field => $value]);
+            if (null !== $existing) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    public function Message(string $message, bool $state = false): ?string
+    public function tableCount($repository): int
     {
-        return $state ? $message : null;
+        return $repository->getCount([]);
     }
 }

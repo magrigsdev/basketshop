@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
+use App\Traits\RepositoryUtilsTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -11,20 +12,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CategoryRepository extends ServiceEntityRepository
 {
+    use RepositoryUtilsTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
-    }
-
-    public function save(Category $category, bool $flush = false): bool
-    {
-        $this->getEntityManager()->persist($category);
-        if ($flush) {
-            $this->getEntityManager()->flush();
-
-            return true;
-        }
-
-        return false;
     }
 }

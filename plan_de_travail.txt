@@ -1,46 +1,66 @@
-
-👍 
+Here’s a clear and professional English translation of your work plan:
 
 ---
 
-## 📌 Plan de travail pour la branche `insert-data`
+## 📌 Work Plan for the `insert-data` Branch
 
-### 🔹 Tâche 1 : Gestion des **Users**
+### 🔹 Task 1: Managing **Users**
 
-➡️ Objectif : insertion des données utilisateurs
+➡️ Goal: Insert user data
 
+<<<<<<< HEAD
 * **Sous-tâche 1.1** : Écrire un **test unitaire** pour vérifier l’insertion d’un `User` en BDD.👍
 * **Sous-tâche 1.2** : Implémenter la fonction `createUser()` (insertion réelle).👍
 * **Sous-tâche 1.3** : Vérifier que les données sont bien persistées et récupérables en BDD.👍
 
 * ** 1.4 insertion des données :
         1.4.1 : 
+=======
+* **Sub-task 1.1**: Write a **unit test** to verify the insertion of a `User` into the database. 👍
+
+* **Sub-task 1.2**: Implement the `createUser()` function (actual insertion). 👍
+
+* **Sub-task 1.3**: Ensure that the data is properly persisted and retrievable from the database. 👍
+
+* **1.4 Data insertion:** 👍
+
+  * 1.4.1: user
+  * 1.4.2: category
+  * 1.4.3: product
+
+* **Sub-task 1.5**: Clean up code (in progress) 👷 🚧
+
+* **Sub-task 1.6**: Verify that all tests pass successfully. 🏗️
+>>>>>>> interface-home
 
 ---
 
-### 🔹 Tâche 2 : **Connexion utilisateur**
+### 🔹 Task 2: **User Login**  ⏳
 
-➡️ Objectif : permettre à un `User` de se connecter
+➡️ Goal: Allow a `User` to log in ⏳
 
-* **Sous-tâche 2.1** : Écrire un **test fonctionnel** qui simule une connexion avec des credentials valides.
-* **Sous-tâche 2.2** : Écrire un **test fonctionnel** qui simule une connexion avec des credentials invalides.
-* **Sous-tâche 2.3** : Implémenter la connexion réelle (formulaire + configuration `security.yaml`).
-* **Sous-tâche 2.4** : Vérifier que la connexion fonctionne en conditions réelles (navigateur ou Postman).
-
----
-
-### 🔹 Tâche 3 : **Déconnexion utilisateur**
-
-➡️ Objectif : permettre à un `User` de se déconnecter
-
-* **Sous-tâche 3.1** : Écrire un **test fonctionnel** pour s’assurer qu’un utilisateur connecté peut se déconnecter.
-* **Sous-tâche 3.2** : Implémenter la déconnexion réelle (route `/logout`).
-* **Sous-tâche 3.3** : Vérifier en conditions réelles que la déconnexion renvoie bien vers `/login`.
+* **Sub-task 2.1**: Write a **functional test** simulating login with valid credentials.
+* **Sub-task 2.2**: Write a **functional test** simulating login with invalid credentials.
+* **Sub-task 2.3**: Implement the actual login (form + `security.yaml` configuration).
+* **Sub-task 2.4**: Verify that login works in real conditions (browser or Postman).
 
 ---
 
-### 🔹 Tâche 4 : Validation finale
+### 🔹 Task 3: **User Logout** ⏳
 
-* **Sous-tâche 4.1** : Relancer **toute la suite de tests PHPUnit** (`php bin/phpunit --testdox --colors=always`).
-* **Sous-tâche 4.2** : Vérifier le fonctionnement complet (insertion → connexion → déconnexion) dans le navigateur.
+➡️ Goal: Allow a `User` to log out
 
+* **Sub-task 3.1**: Write a **functional test** to ensure a logged-in user can log out.
+* **Sub-task 3.2**: Implement the actual logout (route `/logout`).
+* **Sub-task 3.3**: Verify in real conditions that logout correctly redirects to `/login`.
+
+---
+
+### 🔹 Task 4: Final Validation ⏳
+
+* **Sub-task 4.1**: Run the **entire PHPUnit test suite** (`php bin/phpunit --testdox --colors=always`).
+* **Sub-task 4.2**: Verify the full workflow (insertion → login → logout) in the browser.
+
+---
+
+Would you like me to also **polish it for a GitHub issue or pull request description** (with a more concise checklist style ✅)?

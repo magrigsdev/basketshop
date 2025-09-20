@@ -34,4 +34,14 @@ class CategoryRepositoryTest extends KernelTestCase
         $this->assertEquals('category created success', $category_created['message']);
         $this->assertNotNull($this->category_repository->save($category, true));
     }
+
+    public function testGetAllCategories(): void
+    {
+        $categories = $this->category_repository->getAll();
+        $this->assertIsArray($categories);
+        $this->assertNotEmpty($categories);
+        foreach ($categories as $category) {
+            $this->assertInstanceOf(Category::class, $category);
+        }
+    }
 }
