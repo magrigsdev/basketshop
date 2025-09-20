@@ -15,6 +15,7 @@ final class SignInController extends AbstractController
             'controller_name' => 'SignInController',
             'page' => 'sign_in',
             'title' => 'BasketShop - Sign In',
+            'message' => $_GET['message'] ?? null,
         ]);
     }
 }
