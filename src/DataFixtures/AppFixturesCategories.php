@@ -19,8 +19,7 @@ class AppFixturesCategories extends Fixture
         ];
 
         $categories = [];
-        foreach ($categories_data as $name => $desc) 
-            {
+        foreach ($categories_data as $name => $desc) {
             $category = new Category();
             $category->setName($name);
             $category->setDescription($desc);

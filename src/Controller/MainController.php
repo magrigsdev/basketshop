@@ -18,10 +18,7 @@ final class MainController extends AbstractController
             'keywords' => 'basket, shop, online shopping, ecommerce, products',
             'page' => 'main', // Specify the current page for active navigation
             'status' => 'offline',
-<<<<<<< HEAD
-=======
             'products' => $product_repository,
->>>>>>> interface-home
         ]);
     }
 }

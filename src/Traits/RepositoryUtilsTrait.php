@@ -56,17 +56,14 @@ trait RepositoryUtilsTrait
     }
 
     /**
-     * Checks whether an entity exists for the given field and value.
+     * @param array $criteria key-value pairs to search
      *
-     * @param string $field the field name to search by
-     * @param mixed  $value the value to check against
-     *
-     * @return bool true if an entity exists, false otherwise
+     * @return bool True if a record exist, false otherwise
      */
-    public function ExistEntity(string $field, mixed $value): bool
+    public function recordExists(array $criteria): bool
     {
-        $entity = $this->findOneBy([$field => $value]);
+        $entity = $this->findOneBy($criteria);
 
-        return null !== $entity; // true the value existe
+        return null !== $entity;
     }
 }
