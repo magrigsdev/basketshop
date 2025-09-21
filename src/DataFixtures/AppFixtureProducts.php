@@ -2,11 +2,20 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Product;
+use App\Repository\CategoryRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 class AppFixtureProducts extends Fixture
 {
+    private CategoryRepository $category_repository;
+
+    public function __construct(CategoryRepository $category_repository)
+    {
+        $this->category_repository = $category_repository;
+    }
+
     public function load(ObjectManager $manager): void
     {
         $products =
@@ -52,5 +61,17 @@ class AppFixtureProducts extends Fixture
             ['Adidas ZX 2K', 'Design futuriste et performance', 120, 'https://www.adidas.com/zx-2k', 22, 'Streetwear'],
             ['Vans Checkerboard', 'Classique skate et lifestyle', 60, 'https://www.vans.com/checkerboard', 30, 'Skate'],
         ];
+
+        foreach ($products as [$name, $desc, $price, $image, $stock, $cat]) {
+            $product = new Product();
+            $product->setName($name)
+                ->setDescription($desc)
+                ->setPrice($price)
+                ->setImage($image)
+                ->setStock($stock)
+                ->setCategory($this->category_repository->getIdByName('name', $cat));
+            $manager->persist($product);
+        }
+        $manager->flush();
     }
 }
