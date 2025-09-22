@@ -3,8 +3,8 @@
 namespace App\Tests\Traits;
 
 
+use App\Exception\TableNotAllowedException;
 use App\Traits\RepositoryHelpersTrait;
-use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class RepositoryHelpersTraitTest extends KernelTestCase
@@ -29,7 +29,9 @@ class RepositoryHelpersTraitTest extends KernelTestCase
         $method->setAccessible(true);
         return $method->invoke($object, $table);
     }
-    // ************************* FIN FUNCTION PRIVATE **************
+    // ************************* TEST PRIVATE FUNCTIONS **************
+
+    
     public function testIsAllowedTableReturnsTrueForAllowedTable()
     {
         $rep = $this->getDummyRepository();
@@ -42,5 +44,17 @@ class RepositoryHelpersTraitTest extends KernelTestCase
         $this->expectExceptionMessage("Table exemple_table non autorisée.");
         $this->callsAllowedTable($rep,"isAllowedTable","exemple_table");
         
+    }
+
+    // public function testFindByEmailReturnNullWhenEmailNotFound()
+    // {
+
+    // }
+
+    public function testFindByEmailThrowsExceptionForInvalidTable()
+    {
+        $this->expectException(TableNotAllowedException::class);
+        $rep = $this->getDummyRepository();
+        $rep->findByEmail('invalid_table','test@gmail.com');
     }
 }
