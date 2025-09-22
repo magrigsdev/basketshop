@@ -4,7 +4,7 @@ namespace App\Traits;
 
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-trait RepositoryUtilsTrait
+trait  RepositoryHelpersTrait
 {
     private UserPasswordHasherInterface $passwordHasher;
 
@@ -24,26 +24,7 @@ trait RepositoryUtilsTrait
         return $this->findAll();
     }
 
-    /**
-     * Persists the given entity to the database.
-     *
-     * @param object $entity the entity instance to be saved
-     * @param bool   $flush  whether to immediately flush changes to the database
-     *
-     * @return bool returns true if the entity was flushed, false otherwise
-     */
-    public function save(object $entity, bool $flush = false): bool
-    {
-        $this->getEntityManager()->persist($entity);
-        if ($flush) {
-            $this->getEntityManager()->flush();
-
-            return true;
-        }
-
-        return false;
-    }
-
+    
     /**
      * Returns the ID of an entity based on a given field.
      *
@@ -79,5 +60,11 @@ trait RepositoryUtilsTrait
     public function isPasswordValid(string $password): bool
     {
         return $this->passwordHasher->isPasswordValid($this, $password);
+    }
+
+    //recherche simple et personnaliser
+    public function findByEmail(string $email)
+    {
+        
     }
 }
