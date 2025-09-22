@@ -2,8 +2,12 @@
 
 namespace App\Traits;
 
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 trait RepositoryUtilsTrait
 {
+    private UserPasswordHasherInterface $passwordHasher;
+
     /**
      * Returns the record count.
      */
@@ -65,5 +69,15 @@ trait RepositoryUtilsTrait
         $entity = $this->findOneBy($criteria);
 
         return null !== $entity;
+    }
+
+    public function hashPassword($password): string
+    {
+        return $this->passwordHasher->hashPassword($this, $password);
+    }
+
+    public function isPasswordValid(string $password): bool
+    {
+        return $this->passwordHasher->isPasswordValid($this, $password);
     }
 }

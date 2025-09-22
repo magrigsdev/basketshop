@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
-use App\Service\UserService;
+use App\Traits\RepositoryUtilsTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -13,8 +13,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  */
 class UserRepository extends ServiceEntityRepository
 {
+    use RepositoryUtilsTrait;
     private PasswordAuthenticatedUserInterface $paui;
-    private UserService $user_service;
 
     public function __construct(ManagerRegistry $registry)
     {
