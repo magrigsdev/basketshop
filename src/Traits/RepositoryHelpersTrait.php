@@ -7,6 +7,21 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 trait  RepositoryHelpersTrait
 {
     private UserPasswordHasherInterface $passwordHasher;
+    private array $White_list = ['user','category','products'];
+
+    // ****************  PROTECTED FUNCTIONS ****************************
+     /**
+     * Retourne une exception si la table n'existe pas.
+     */
+    protected function isAllowedTable(string $table):mixed
+    {
+        if(!in_array($table, $this->White_list, true))
+        {
+            throw new \InvalidArgumentException("Table ".$table. " non autorisée.");
+        }
+        return true;
+    }
+    // ********************* PROTECTED FUNCTIONS **************************
 
     /**
      * Returns the record count.
@@ -63,8 +78,14 @@ trait  RepositoryHelpersTrait
     }
 
     //recherche simple et personnaliser
-    public function findByEmail(string $email)
+    public function findByEmail(string $table, string $email):mixed
     {
-        
+        if($this->isAllowedTable($table))
+        {
+            $connection = $this->getEntityManager()->getConnection();
+            $sql = 'SELECT * FROM  '.$table.' WHERE email = :email';
+            $result = $connection->fetchAssociative($sql, ['email'=>$email]);     
+        }
+        return $result ?:null;
     }
 }
