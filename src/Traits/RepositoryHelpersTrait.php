@@ -3,6 +3,8 @@
 namespace App\Traits;
 
 use App\Exception\TableNotAllowedException;
+use App\Service\DynamicQueryService;
+use App\Service\EmailValidator;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 trait  RepositoryHelpersTrait
@@ -13,6 +15,10 @@ trait  RepositoryHelpersTrait
     use SoftDeleteTrait;
     use UserFilteredTrait;
     use StatsTrait;
+    use UserFilteredTrait;
+
+    private EmailValidator $email_validator;
+    private DynamicQueryService $dynamic_query;
     private UserPasswordHasherInterface $passwordHasher;
     private array $White_list = ['user','category','products','visit'];
 
@@ -72,32 +78,11 @@ trait  RepositoryHelpersTrait
     {
         if(!$this->isAllowedTable($table))
         {
-            if($_ENV['APP_DEBUG'])
-            {
-                throw new \InvalidArgumentException("la table ". $table . " n'est pas autorisée.");
-            }
-            else ;
-            {
-                $this->logger->error("Tentative d'access à la table non autorisée", 
-                [
-                    'table'=> $table,
-                    'email'=>$email,
-                ]);
-                throw new TableNotAllowedException();
-            }
+            throw new TableNotAllowedException($table);
         }
-        // if(!$this->isAllowedTable($table))
-        // {
-        //     throw new \InvalidArgumentException("la table ". $table . " n'est pas autorisée.");
-        // }
+        $this->email_validator->validate($email);
 
-        // if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-        // {
-        //     throw new \InvalidArgumentException("email ". $email . " n'est pas valide.");     
-        // }
-        $connection  = $this->getEntityManager()->getConnection();
-        $sql = "SELECT * FROM " . $connection->quoteIdentifier($table) . " WHERE email = :email LIMIT 1";
-        return $connection->fetchAssociative($sql, ['email'=>$email]) ?:null;
+        return $this->dynamic_query->findByEmail($table,$email);
     }
 
      // /**

@@ -46,11 +46,6 @@ class RepositoryHelpersTraitTest extends KernelTestCase
         
     }
 
-    // public function testFindByEmailReturnNullWhenEmailNotFound()
-    // {
-
-    // }
-
     public function testFindByEmailThrowsExceptionForInvalidTable()
     {
         $this->expectException(TableNotAllowedException::class);

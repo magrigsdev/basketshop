@@ -4,8 +4,8 @@ namespace App\Exception;
 
 class TableNotAllowedException extends \RuntimeException
 {
-    public function __construct(string $message = "Accès non autorisé.", int $code = 0, \Throwable $previous = null)
+    public function __construct(string $table)
     {
-        parent::__construct($message,$code,$previous);
+        parent::__construct(sprintf('The table "%s" is not allowed',$table));
     }
 }
