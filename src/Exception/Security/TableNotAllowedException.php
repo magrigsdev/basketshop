@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Exception;
+namespace App\Exception\Security;
 
 class TableNotAllowedException extends \RuntimeException
 {
