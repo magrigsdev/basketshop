@@ -12,8 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-
-
 final class RegisterController extends AbstractController
 {
     #[Route('/register', name: 'app_register', methods: ['GET', 'POST'])]

@@ -34,13 +34,13 @@ class TableAccessManager
         if (empty(trim($table))) {
             $message = 'The speficied table name is either empty or invalid';
             $this->logger->error($message, ['table' => $table]);
-            throw new TableNotEmptyException($this->isDevEnvironement ? $message : 'Access denied.', 1);
+            throw new TableNotEmptyException($this->isDevEnvironement ? $message : 'Access denied.');
         }
 
         if (!in_array($table, $this->whiteList, true)) {
             $message = sprintf("The specified table '%s' is not authorized.", $table);
             $this->logger->error($message, ['table' => $table]);
-            throw new TableNotAllowedException($this->isDevEnvironement ? $message : 'Access denied.', 1);
+            throw new TableNotAllowedException($this->isDevEnvironement ? $message : 'Access denied.');
         }
 
         return true;
