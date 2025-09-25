@@ -1,0 +1,9 @@
+# Repository Responsibilities
+
+Un Repository doit contenir uniquement :
+- Les fonctions liées à la récupération des données d’une entité.
+- Les filtres et recherches (findByStatus, findByEmail, etc.).
+- Les méthodes de comptage (countActive, countAll).
+- Les jointures nécessaires pour enrichir les entités.
+
+

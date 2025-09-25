@@ -21,14 +21,10 @@ php bin/console doctrine:migrations:migrate
 //le etat des migrations
 php bin/console doctrine:migrations:status
 
+*************** TEST ****************
 //tester la fonction
 php bin/phpunit tests/Repository/CategoryRepositoryTest.php --filter testCreateCategory --testdox --colors=always
 
 
-<<<<<<< HEAD
 //
 php bin/console doctrine:fixtures:loadCategory -n
-=======
-//add data on database
-php bin/console doctrine:fixtures:load --append -n
->>>>>>> interface-home
