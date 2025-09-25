@@ -1,9 +1,8 @@
-<?php 
+<?php
 
 namespace App\Traits;
 
-Trait DateSearchTrait
+trait DateSearchTrait
 {
-// findOrdersBetweenDates, findInactiveUsersSince
-    
+    // findOrdersBetweenDates, findInactiveUsersSince
 }

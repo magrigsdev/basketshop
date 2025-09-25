@@ -1,12 +1,12 @@
-<?php 
+<?php
 
 namespace Tests\Service;
 
-use App\Logger\AppLogger;
-use PHPUnit\Framework\TestCase;
-use App\Service\TableAccessManager;
 use App\Exception\Security\TableNotAllowedException;
 use App\Exception\Security\TableNotEmptyException;
+use App\Logger\AppLogger;
+use App\Service\TableAccessManager;
+use PHPUnit\Framework\TestCase;
 
 class TableAccessManagerTest extends TestCase
 {
@@ -16,7 +16,7 @@ class TableAccessManagerTest extends TestCase
     protected function setUp(): void
     {
         $this->loggerMock = $this->createMock(AppLogger::class);
-        $whiteList = ['user','products'];
+        $whiteList = ['user', 'products'];
         $this->tableAccessManager = new TableAccessManager(
             $this->loggerMock,
             $whiteList,
@@ -28,6 +28,7 @@ class TableAccessManagerTest extends TestCase
     {
         $this->assertTrue($this->tableAccessManager->isAllowedtable('user'));
     }
+
     public function testIsAllowedTableWithEmptyTable()
     {
         $this->expectException(TableNotEmptyException::class);

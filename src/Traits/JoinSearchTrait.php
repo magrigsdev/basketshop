@@ -1,12 +1,16 @@
-<?php 
+<?php
 
 namespace App\Traits;
 
-Trait JoinSearchTrait
+trait JoinSearchTrait
 {
-    public function findUserWithOrders(){}
-    public function findProductWithCategories(){}
-    
+    public function findUserWithOrders()
+    {
+    }
+
+    public function findProductWithCategories()
+    {
+    }
+
     // findUserWithOrders, findProductWithCategories, findUsersWithProfiles
-    
 }

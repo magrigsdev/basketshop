@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Logger;
 
@@ -13,9 +13,8 @@ class AppLogger
         $this->loggerInterface = $loggerInterface;
     }
 
-    public function error(string $message, array $context = []):void 
+    public function error(string $message, array $context = []): void
     {
         $this->loggerInterface->error($message, $context);
     }
-	
 }

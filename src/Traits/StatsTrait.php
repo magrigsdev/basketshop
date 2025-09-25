@@ -1,8 +1,8 @@
-<?php 
-
+<?php
 
 namespace App\Traits;
 
-Trait StatsTrait {
+trait StatsTrait
+{
     // countUsersByRole, getTotalSalesForMonth, getAverageOrderValue
 }

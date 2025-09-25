@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace App\Traits;
 
-Trait UniqueSearchTrait 
+trait UniqueSearchTrait
 {
     // findByExternalId, findByToken
 }

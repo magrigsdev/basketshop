@@ -12,7 +12,6 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  */
 class UserRepository extends ServiceEntityRepository
 {
-    
     private PasswordAuthenticatedUserInterface $paui;
 
     public function __construct(ManagerRegistry $registry)

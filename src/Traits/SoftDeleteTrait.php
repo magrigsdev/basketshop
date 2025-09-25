@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace App\Traits;
 
-Trait SoftDeleteTrait 
+trait SoftDeleteTrait
 {
     // findNotDeleted, findDeleted
 }

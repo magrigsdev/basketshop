@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace App\Traits;
 
-Trait UserFilteredTrait
+trait UserFilteredTrait
 {
     // findDocumentsByOwner, findPostsVisibleToUser
 }
