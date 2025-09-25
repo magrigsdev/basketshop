@@ -14,10 +14,10 @@ class CartItem
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'cartItems')]
-    private ?cart $cart = null;
+    private ?Cart $cart = null;
 
     #[ORM\ManyToOne(inversedBy: 'cartItems')]
-    private ?product $product = null;
+    private ?Product $product = null;
 
     #[ORM\Column]
     private ?int $quantity = null;
@@ -32,19 +32,19 @@ class CartItem
         return $this->cart;
     }
 
-    public function setCart(?cart $cart): static
+    public function setCart(?Cart $cart): static
     {
         $this->cart = $cart;
 
         return $this;
     }
 
-    public function getProduct(): ?product
+    public function getProduct(): ?Product
     {
         return $this->product;
     }
 
-    public function setProduct(?product $product): static
+    public function setProduct(?Product $product): static
     {
         $this->product = $product;
 

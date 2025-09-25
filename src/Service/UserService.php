@@ -45,7 +45,7 @@ class UserService
         return $user;
     }
 
-    public function password_is_valid($password, $hashed_password): bool
+    public function isPasswordValid($password, $hashed_password): bool
     {
         return password_verify($password, $hashed_password) ? true : false;
     }
