@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exception;
+namespace App\Exception\Validation\Email;
 
 class InvalidEmailException extends \InvalidArgumentException
 {
