@@ -96,4 +96,9 @@ class NameValidationService
 
         return $cleaned;
     }
+
+    public function validateNameType($typeOfName): bool
+    {
+        return true;
+    }
 }

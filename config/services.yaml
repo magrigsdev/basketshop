@@ -17,5 +17,15 @@ services:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
+    # App\Service\TableAccessManager:
+    #     arguments:
+    #         $allowedTable: '%app.database.allowed_table%'
+            
+
+    # App\Service\NameValidationService:
+    #     arguments:
+    #         $ColumnMmap: '%app.search.name_column_map%'
+
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

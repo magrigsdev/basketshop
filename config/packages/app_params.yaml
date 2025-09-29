@@ -1,0 +1,24 @@
+# config/packages/app_params.yaml
+# Ce fichier contient les paramètres spécifiques à votre application.
+
+parameters:
+    #--------------------------------------------------
+    # congiruation of tables and columns authorizied
+    #--------------------------------------------------
+
+    # tables
+    app.database.allowed_tables:
+        - 'cart'
+        - 'cart_item'
+        - 'category'
+        - 'contact_message'
+        - 'order'
+        - 'order_item'
+        - 'product'
+        - 'user'
+        - 'visit'
+
+    app.search.name_column_map:
+        - 'first_name'
+        - 'last_name'
+        - 'name'
