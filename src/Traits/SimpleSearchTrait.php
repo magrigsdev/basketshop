@@ -51,10 +51,15 @@ trait SimpleSearchTrait
             return false !== $result ? $result : null;
         } catch (TableNotAllowedException $e) {
             // throw $th;
-            throw new \RuntimeException(sprintf("The table '%s' does not exist ", $table), 0, $e);
+            $this->logger->error(sprintf("access denied for table '%s'", $table));
+            throw new \RuntimeException(sprintf("The table '%s' is not accessible.", $table), 0, $e);
+
         } catch (TableNotEmptyException $e) {
             throw new \RuntimeException(sprintf("The table '%s' is empty ", $table), 0, $e);
+
         } catch (\Exception $e) {
+            $this->logger->error("An error occurred while searching for the user.", 
+            ['exception' => $e, 'table' => $table, 'email' => $email]);
             throw new \RuntimeException('An error occurred while searching for the user.', 0, $e);
         }
     }

@@ -2,13 +2,12 @@
 
 namespace App\Exception\Security;
 
+
 class TableNotEmptyException extends \InvalidArgumentException
 {
+
     public function __construct(string $table)
     {
-        $message = empty($table)
-        ? 'The table name cannot be empty or invalid'
-        : "The table name '$table' is invalid";
-        parent::__construct($message);
+        parent::__construct(sprintf("The table '%s' name cannot be empty", $table));
     }
 }

@@ -20,7 +20,7 @@ class TableAccessManagerTest extends TestCase
         $this->tableAccessManager = new TableAccessManager(
             $this->loggerMock,
             $whiteList,
-            true
+            isDevEnvironement: true
         );
     }
 
