@@ -23,6 +23,8 @@ services:
     App\Service\TableAccessManager:
         arguments:
             $whiteList: '%app.database.allowed_tables%'
+            $roles : '%app.database.roles%'
+            $columnName : '%app.database.column_name%'
 
   
     # add more service definitions when explicit configuration is needed

@@ -18,7 +18,11 @@ parameters:
         - 'user'
         - 'visit'
 
-    app.search.name_column_map:
+    app.database.column_name:
         - 'first_name'
         - 'last_name'
         - 'name'
+
+    app.database.roles:
+        - 'ROLE_USER'
+        - 'ROLE_ADMIN'
