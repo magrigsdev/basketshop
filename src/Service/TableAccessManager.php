@@ -2,11 +2,11 @@
 
 namespace App\Service;
 
-use App\Logger\AppLogger;
 use App\Exception\Security\FieldNotEmptyException;
-use App\Exception\Security\TableNotEmptyException;
 use App\Exception\Security\RoleNotAllowedException;
 use App\Exception\Security\TableNotAllowedException;
+use App\Exception\Security\TableNotEmptyException;
+use App\Logger\AppLogger;
 
 class TableAccessManager
 {
@@ -14,16 +14,13 @@ class TableAccessManager
     private array $whiteList;
     private array $columnName;
     private array $roles;
-    private bool $isDevEnvironement;
-   
 
-    public function __construct(AppLogger $logger, array $whiteList, bool $isDevEnvironement, $roles , $columnName)
+    public function __construct(AppLogger $logger, array $whiteList, array $roles, array $columnName)
     {
         $this->logger = $logger;
         $this->whiteList = $whiteList;
-        $this->isDevEnvironement = $isDevEnvironement;
         $this->roles = $roles;
-        $this->columnName = $columnName; 
+        $this->columnName = $columnName;
     }
 
     /**
@@ -42,7 +39,7 @@ class TableAccessManager
             throw new TableNotEmptyException($table);
         }
 
-        if (!in_array($table, $this->whiteList, true)) {         
+        if (!in_array($table, $this->whiteList, true)) {
             throw new TableNotAllowedException($table);
         }
 
@@ -56,9 +53,10 @@ class TableAccessManager
             throw new FieldNotEmptyException($role);
         }
 
-        if (!in_array($role, $this->roles, true)) {         
+        if (!in_array($role, $this->roles, true)) {
             throw new RoleNotAllowedException($role);
         }
+
         return true;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Service;
 
+use App\Exception\Security\RoleNotAllowedException;
 use App\Exception\Security\TableNotAllowedException;
 use App\Exception\Security\TableNotEmptyException;
 use App\Logger\AppLogger;
@@ -12,15 +13,20 @@ class TableAccessManagerTest extends TestCase
 {
     private AppLogger $loggerMock;
     private TableAccessManager $tableAccessManager;
+    private array $columnName = [];
 
     protected function setUp(): void
     {
         $this->loggerMock = $this->createMock(AppLogger::class);
         $whiteList = ['user', 'products'];
+        $roles = ['ROLE_USER', 'ROLE_ADMIN'];
+        $columnName = ['name'];
+
         $this->tableAccessManager = new TableAccessManager(
             $this->loggerMock,
             $whiteList,
-            isDevEnvironement: true
+            $roles,
+            $columnName
         );
     }
 
@@ -39,5 +45,19 @@ class TableAccessManagerTest extends TestCase
     {
         $this->expectException(TableNotAllowedException::class);
         $this->tableAccessManager->isAllowedtable('forbidden_table');
+    }
+
+    // ****************** ROLE TEST */
+
+    public function testIsRolesAllowsWithRoleNotValidException(): void
+    {
+        $this->expectException(RoleNotAllowedException::class);
+        $this->tableAccessManager->isRoles(['ROLE_UNKOWN']);
+    }
+
+    public function testIsRolesAllowsWithRoleValid(): void
+    {
+        $roleValid = $this->tableAccessManager->isRoles(['ROLE_USER']);
+        $this->assertTrue($roleValid);
     }
 }

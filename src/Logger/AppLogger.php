@@ -25,5 +25,4 @@ class AppLogger
     {
         $this->loggerInterface->info($message, $context);
     }
-
 }

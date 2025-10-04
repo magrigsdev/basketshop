@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Exception\Security;
 
 class RoleNotAllowedException extends \RuntimeException

@@ -2,16 +2,16 @@
 
 namespace App\Traits;
 
-use Psr\Log\LoggerInterface;
-use Doctrine\DBAL\Connection;
-use App\Service\TableAccessManager;
-use App\Service\NameValidationService;
 use App\Exception\Security\FieldNotEmptyException;
-use App\Exception\Security\TableNotEmptyException;
 use App\Exception\Security\RoleNotAllowedException;
 use App\Exception\Security\TableNotAllowedException;
+use App\Exception\Security\TableNotEmptyException;
 use App\Exception\Validation\Name\EmptyNameException;
 use App\Exception\Validation\Name\InvalidNameFormatException;
+use App\Service\NameValidationService;
+use App\Service\TableAccessManager;
+use Doctrine\DBAL\Connection;
+use Psr\Log\LoggerInterface;
 
 trait SimpleSearchTrait
 {
@@ -55,18 +55,18 @@ trait SimpleSearchTrait
             // throw $th;
             $this->logger->error(sprintf("access denied for table '%s'", $table));
             throw new \RuntimeException(sprintf("The table '%s' is not accessible.", $table), 0, $e);
-
         } catch (TableNotEmptyException $e) {
             throw new \RuntimeException(sprintf("The table '%s' is empty ", $table), 0, $e);
-
         } catch (\Exception $e) {
-            $this->logger->error("An error occurred while searching for the user.", 
-            ['exception' => $e, 'table' => $table, 'email' => $email]);
+            $this->logger->error('An error occurred while searching for the user.',
+                ['exception' => $e, 'table' => $table, 'email' => $email]);
             throw new \RuntimeException('An error occurred while searching for the user.', 0, $e);
         }
     }
 
-    public function findByUsername(){}
+    public function findByUsername()
+    {
+    }
 
     /**
      * Finds a record by first or last name in the specified table.
@@ -90,7 +90,6 @@ trait SimpleSearchTrait
         [
             'first' => 'firstName',
             'last' => 'lastName',
-            
         ];
 
         $columnName = $searchMap[strtolower($typeOfName)] ?? null;
@@ -138,7 +137,9 @@ trait SimpleSearchTrait
         }
     }
 
-    public function findByStatus(){}
+    public function findByStatus()
+    {
+    }
 
     /**
      * Finds a record by role in the specified table.
@@ -146,12 +147,13 @@ trait SimpleSearchTrait
      * This method checks if access to the given table and role is allowed, then queries the table for a record
      * matching the provided role. Returns the first matching record as an associative array, or null if not found.
      *
-     * @param array $role An array containing the role(s) to search for. Only the first role ($role[0]) is used.
-     * @param string $table The name of the table to search in.
-     * @return array|null The found record as an associative array, or null if no matching record is found.
+     * @param array  $role  An array containing the role(s) to search for. Only the first role ($role[0]) is used.
+     * @param string $table the name of the table to search in
      *
-     * @throws \RuntimeException If access to the table or role is denied, the table is empty, the role field is empty,
-     *                           or another error occurs during the search.
+     * @return array|null the found record as an associative array, or null if no matching record is found
+     *
+     * @throws \RuntimeException if access to the table or role is denied, the table is empty, the role field is empty,
+     *                           or another error occurs during the search
      */
     public function findByRole(array $role, string $table): ?array
     {
@@ -171,31 +173,24 @@ trait SimpleSearchTrait
 
             return false !== $result ? $result : null;
 
-            //********** EXCEPTION FOR TABLE */
+            // ********** EXCEPTION FOR TABLE */
         } catch (TableNotAllowedException $e) {
             // throw $th;
             $this->logger->error(sprintf("access denied for table '%s'", $table));
             throw new \RuntimeException(sprintf("The table '%s' is not accessible.", $table), 0, $e);
-
         } catch (TableNotEmptyException $e) {
             throw new \RuntimeException(sprintf("The table '%s' is empty ", $table), 0, $e);
-
         } catch (\Exception $e) {
-            $this->logger->error("An error occurred while searching for the user.", 
-            ['exception' => $e, 'table' => $table, 'role' => $role[0]]);
+            $this->logger->error('An error occurred while searching for the user.',
+                ['exception' => $e, 'table' => $table, 'role' => $role[0]]);
             throw new \RuntimeException('An error occurred while searching for the user.', 0, $e);
-        } 
-        //********** ROLE EXCEPTION */
-        catch(FieldNotEmptyException $e)
-        {
-            throw new \RuntimeException(sprintf("The role field '%s' is empty ", $role[0]), 0, $e);
         }
-        catch(RoleNotAllowedException $e)
-        {
+        // ********** ROLE EXCEPTION */
+        catch (FieldNotEmptyException $e) {
+            throw new \RuntimeException(sprintf("The role field '%s' is empty ", $role[0]), 0, $e);
+        } catch (RoleNotAllowedException $e) {
             $this->logger->error(sprintf("access denied '%s'", $table));
             throw new \RuntimeException(sprintf("The role  '%s' is not accessible ", $role[0]), 0, $e);
         }
-
-        
     }
 }
