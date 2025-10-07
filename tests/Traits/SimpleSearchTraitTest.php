@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_type=1);
-
 namespace App\Tests\Traits;
 
 use App\Service\TableAccessManager;
@@ -17,6 +15,7 @@ class SimpleSearchTraitTest extends TestCase
 {
     private const TABLE = 'user';
     private const EMAIL = 'test@example.com';
+    private const ROLE = 'ROLE_USER';
 
     /**
      * Creates an anonymous class instance that uses the SimpleSearchTrait.
@@ -80,7 +79,17 @@ class SimpleSearchTraitTest extends TestCase
         $queryBuilder->method('executeQuery')->willReturn($result);
     }
 
-    // fin private function
+    private function createResult(QueryBuilder $queryBuilder, Result $result, string $table, string $value)
+    {
+        $queryBuilder->method('select')->with('*')->willReturnSelf();
+        $queryBuilder->method('from')->with($table)->willReturnSelf();
+        $queryBuilder->method('where')->with('role = :role')->willReturnSelf();
+        $queryBuilder->method('setParameter')->with('role', $value)->willReturnSelf();
+        $queryBuilder->method('setMaxresults')->with(1)->willReturnSelf();
+        $queryBuilder->method('executeQuery')->willReturn($result);
+    }
+
+    // *******************  FIN PRIVATE FUNCTION */
 
     public function testFindByEmailReturnsRecord()
     {
@@ -97,6 +106,7 @@ class SimpleSearchTraitTest extends TestCase
 
         $tableAccessManager->expects($this->once())->method('isAllowedTable')->with(self::TABLE);
         $result->expects($this->once())->method('fetchAssociative')->willReturn($expected);
+
         $this->configureQueryBuilder($queryBuilder, $result, self::TABLE, self::EMAIL);
 
         $connection->method('quoteIdentifier')->willReturn(self::TABLE);
@@ -164,5 +174,31 @@ class SimpleSearchTraitTest extends TestCase
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('An error occurred while searching for the user.');
         $dummy->findByEmail(self::TABLE, self::EMAIL);
+    }
+
+    public function testFindRoleReturnRecord(): void
+    {
+        $expected = ['john', 'ROLE_USER'];    // code...
+        $mocks = $this->createMocks();
+        [
+            'connection' => $connection,
+            'tableAccessManager' => $tableAccessManager,
+            'result' => $result,
+            'queryBuilder' => $queryBuilder,
+            'logger' => $logger,
+        ] = $mocks;
+
+        $tableAccessManager->expects($this->once())->method('isAllowedTable')->with(self::TABLE);
+        $tableAccessManager->expects($this->once())->method('isRoles')->with(self::ROLE)->willReturn(true);
+
+        $result->expects($this->once())->method('fetchAssociative')->willReturn($expected);
+
+        $this->createResult($queryBuilder, $result, self::TABLE, self::ROLE);
+
+        $connection->method('quoteIdentifier')->willReturn(self::TABLE);
+        $connection->method('createQueryBuilder')->willReturn($queryBuilder);
+
+        $dummy = $this->createDummy($connection, $logger, $tableAccessManager);
+        $this->assertSame($expected, $dummy->findByRole(self::TABLE, self::ROLE));
     }
 }

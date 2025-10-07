@@ -2,21 +2,26 @@
 
 namespace App\Service;
 
-use App\Exception\Security\TableNotAllowedException;
-use App\Exception\Security\TableNotEmptyException;
+use App\Exception\Security\Fields\FieldNotEmptyException;
+use App\Exception\Security\Roles\RoleInvalidValueException;
+use App\Exception\Security\Roles\RoleNotAllowedException;
+use App\Exception\Security\Tables\TableNotAllowedException;
+use App\Exception\Security\Tables\TableNotEmptyException;
 use App\Logger\AppLogger;
 
 class TableAccessManager
 {
     private AppLogger $logger;
     private array $whiteList;
-    private bool $isDevEnvironement;
+    private array $columnName;
+    private array $roles;
 
-    public function __construct(AppLogger $logger, array $whiteList, bool $isDevEnvironement)
+    public function __construct(AppLogger $logger, array $whiteList, array $roles, array $columnName)
     {
         $this->logger = $logger;
         $this->whiteList = $whiteList;
-        $this->isDevEnvironement = $isDevEnvironement;
+        $this->roles = $roles;
+        $this->columnName = $columnName;
     }
 
     /**
@@ -32,15 +37,28 @@ class TableAccessManager
     public function isAllowedtable(string $table): bool
     {
         if (empty(trim($table))) {
-            $message = 'The speficied table name is either empty or invalid';
-            $this->logger->error($message, ['table' => $table]);
-            throw new TableNotEmptyException($this->isDevEnvironement ? $message : 'Access denied.', 1);
+            throw new TableNotEmptyException($table);
         }
 
         if (!in_array($table, $this->whiteList, true)) {
-            $message = sprintf("The specified table '%s' is not authorized.", $table);
-            $this->logger->error($message, ['table' => $table]);
-            throw new TableNotAllowedException($this->isDevEnvironement ? $message : 'Access denied.', 1);
+            throw new TableNotAllowedException($table);
+        }
+
+        return true;
+    }
+
+    public function isRoles(string $role): bool
+    {
+        if (empty(is_string(trim($role)))) {
+            throw new FieldNotEmptyException($role);
+        }
+
+        if (!is_string($role)) {
+            throw new RoleInvalidValueException($role);
+        }
+
+        if (!in_array($role, $this->roles, true)) {
+            throw new RoleNotAllowedException($role);
         }
 
         return true;

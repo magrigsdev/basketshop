@@ -36,7 +36,7 @@ class User
     private ?string $city = null;
 
     #[ORM\Column(length: 255)]
-    private array $roles = [];
+    private string $roles = 'ROLE_USER';
 
     /**
      * @var Collection<int, Order>
@@ -145,12 +145,12 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?array
+    public function getRoles(): string
     {
         return $this->roles;
     }
 
-    public function setRoles(array $roles): static
+    public function setRoles(string $roles): static
     {
         $this->roles = $roles;
 
