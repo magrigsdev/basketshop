@@ -2,10 +2,11 @@
 
 namespace App\Service;
 
-use App\Exception\Security\FieldNotEmptyException;
-use App\Exception\Security\RoleNotAllowedException;
-use App\Exception\Security\TableNotAllowedException;
-use App\Exception\Security\TableNotEmptyException;
+use App\Exception\Security\Fields\FieldNotEmptyException;
+use App\Exception\Security\Roles\RoleInvalidValueException;
+use App\Exception\Security\Roles\RoleNotAllowedException;
+use App\Exception\Security\Tables\TableNotAllowedException;
+use App\Exception\Security\Tables\TableNotEmptyException;
 use App\Logger\AppLogger;
 
 class TableAccessManager
@@ -46,11 +47,14 @@ class TableAccessManager
         return true;
     }
 
-    public function isRoles(array $role): bool
+    public function isRoles(string $role): bool
     {
-        $role = $role[0];
-        if (empty(trim($role[0]))) {
+        if (empty(is_string(trim($role)))) {
             throw new FieldNotEmptyException($role);
+        }
+
+        if (!is_string($role)) {
+            throw new RoleInvalidValueException($role);
         }
 
         if (!in_array($role, $this->roles, true)) {

@@ -2,10 +2,11 @@
 
 namespace App\Traits;
 
-use App\Exception\Security\FieldNotEmptyException;
-use App\Exception\Security\RoleNotAllowedException;
-use App\Exception\Security\TableNotAllowedException;
-use App\Exception\Security\TableNotEmptyException;
+use App\Exception\Security\Fields\FieldNotEmptyException;
+use App\Exception\Security\Roles\RoleInvalidValueException;
+use App\Exception\Security\Roles\RoleNotAllowedException;
+use App\Exception\Security\Tables\TableNotAllowedException;
+use App\Exception\Security\Tables\TableNotEmptyException;
 use App\Exception\Validation\Name\EmptyNameException;
 use App\Exception\Validation\Name\InvalidNameFormatException;
 use App\Service\NameValidationService;
@@ -155,7 +156,7 @@ trait SimpleSearchTrait
      * @throws \RuntimeException if access to the table or role is denied, the table is empty, the role field is empty,
      *                           or another error occurs during the search
      */
-    public function findByRole(array $role, string $table): ?array
+    public function findByRole(string $table, string $role): ?array
     {
         $this->tableAccessManager->isAllowedtable($table);
         $this->tableAccessManager->isRoles($role);
@@ -167,7 +168,7 @@ trait SimpleSearchTrait
             ->select('*')
             ->from($this->connection->quoteIdentifier($table))
             ->where('role = :role')
-            ->setParameter('role', $role[0])
+            ->setParameter('role', $role)
             ->setMaxResults(1);
             $result = $queryBuilder->executeQuery()->fetchAssociative();
 
@@ -180,17 +181,25 @@ trait SimpleSearchTrait
             throw new \RuntimeException(sprintf("The table '%s' is not accessible.", $table), 0, $e);
         } catch (TableNotEmptyException $e) {
             throw new \RuntimeException(sprintf("The table '%s' is empty ", $table), 0, $e);
-        } catch (\Exception $e) {
-            $this->logger->error('An error occurred while searching for the user.',
-                ['exception' => $e, 'table' => $table, 'role' => $role[0]]);
-            throw new \RuntimeException('An error occurred while searching for the user.', 0, $e);
         }
-        // ********** ROLE EXCEPTION */
+        // **************** GENERALE EXCEPTION  */
         catch (FieldNotEmptyException $e) {
             throw new \RuntimeException(sprintf("The role field '%s' is empty ", $role[0]), 0, $e);
-        } catch (RoleNotAllowedException $e) {
+        }
+        // ********** ROLE EXCEPTION */
+        catch (RoleNotAllowedException $e) {
             $this->logger->error(sprintf("access denied '%s'", $table));
             throw new \RuntimeException(sprintf("The role  '%s' is not accessible ", $role[0]), 0, $e);
+        } catch (RoleInvalidValueException $e) {
+            $this->logger->error(sprintf("access denied '%s'", $role));
+            throw new \RuntimeException(sprintf("Invalid role value '%s' ", $role[0]), 0, $e);
+        }
+
+        // *************** EXCEPTION FINAL */
+        catch (\Exception $e) {
+            $this->logger->error('An error occurred while searching : unkown error...',
+                ['exception' => $e, 'table' => $table, 'role' => $role]);
+            throw new \RuntimeException('An error occurred while searching : unkown error !', 0, $e);
         }
     }
 }

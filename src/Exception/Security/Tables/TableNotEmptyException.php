@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exception\Security;
+namespace App\Exception\Security\Tables;
 
 class TableNotEmptyException extends \InvalidArgumentException
 {
